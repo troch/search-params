@@ -2,7 +2,7 @@
   "name": "query-string",
   "version": "1.0.0",
   "description": "A module to manipulate search part of URLs (querystring)",
-  "main": "index.js",
+  "main": "dist/commonjs/index.js",
   "devDependencies": {
     "babel-core": "^6.4.0",
     "babel-eslint": "^5.0.0",
