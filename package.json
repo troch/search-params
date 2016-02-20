@@ -1,0 +1,41 @@
+{
+  "name": "query-string",
+  "version": "1.0.0",
+  "description": "A module to manipulate search part of URLs (querystring)",
+  "main": "index.js",
+  "devDependencies": {
+    "babel-core": "^6.4.0",
+    "babel-eslint": "^5.0.0",
+    "babel-plugin-transform-export-extensions": "^6.4.0",
+    "babel-plugin-transform-object-rest-spread": "^6.3.13",
+    "babel-preset-es2015": "^6.3.13",
+    "chai": "^3.4.1",
+    "eslint": "^2.1.0",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.5.0",
+    "mocha": "^2.3.4"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build:cjs": "babel modules --out-dir dist/commonjs",
+    "build": "npm run clean && mkdirp dist && npm run build:cjs",
+    "test": "mocha --compilers js:babel-core/register --recursive 'test/main.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/troch/query-string.git"
+  },
+  "keywords": [
+    "querystring",
+    "query",
+    "search",
+    "location",
+    "url"
+  ],
+  "author": "Thomas Roch <thomas.c.roch@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/troch/query-string/issues"
+  },
+  "homepage": "https://github.com/troch/query-string#readme"
+}
