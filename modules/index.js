@@ -1,6 +1,6 @@
 // Split path
-const getPath = path => path.split('?')[0];
-const getSearch = path => path.split('?')[1];
+export const getPath = path => path.split('?')[0];
+export const getSearch = path => path.split('?')[1];
 
 // Search param value
 const isSerialisable = val => val !== undefined && val !== null && val !== '';
@@ -30,7 +30,7 @@ export const parse = querystring =>
  * @param  {Array} paramList The list of parameters returned by `.parse()`
  * @return {Object}          The object of parameters (key-value pairs)
  */
-export const toParams = paramList =>
+export const toObject = paramList =>
     paramList
         .reduce((params, { name, value }) => {
             const isArray = hasBrackets(name);

@@ -4,10 +4,18 @@
 
 ## API
 
-#### parse(querystring)
+#### parse(querystring: String): Array[Object]
 
-#### toObject(paramList)
+Parse a querystring to a parameters list (an array of objects with name and value properties)
 
-#### build(paramList)
+#### toObject(paramList: Array[Object]): Object
 
-#### omit(querystring, paramsToOmit)
+Convert a list of parameters to an object (key-value pairs)
+
+#### build(paramList: Array): String
+
+Build a querystring from a list of parameters
+
+#### omit(querystring: String, paramsToOmit: Array[String]): String
+
+Remove a list of parameters (names) from a querystring
