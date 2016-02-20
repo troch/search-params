@@ -1,4 +1,4 @@
-# query-params
+# search-params
 
 > A module to manipulate search part of URLs (querystring). Created to externalise some code shared by [path-parser](troch/path-parser) and [route-node](troch/route-node).
 
@@ -26,7 +26,7 @@ Remove a list of parameters (names) from a querystring
 For more examples, look at the tests.
 
 ```js
-import { parse, build, toObject, omit } from 'query-params';
+import { parse, build, toObject, omit } from 'search-params';
 
 parse('country=scotland&town=glasgow');
 // [
