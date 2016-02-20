@@ -19,3 +19,36 @@ Build a querystring from a list of parameters
 #### omit(querystring: String, paramsToOmit: Array[String]): String
 
 Remove a list of parameters (names) from a querystring
+
+
+## Example
+
+For more examples, look at the tests.
+
+```js
+import { parse, build, toObject, omit } from 'query-string';
+
+parse('country=scotland&town=glasgow');
+// [
+//     { name: 'country', value: 'scotland' },
+//     { name: 'town', value: 'glasgow' }
+// ]
+
+build([
+    { name: 'country', value: 'scotland' },
+    { name: 'town', value: 'glasgow' }
+])
+// 'country=scotland&town=glasgow'
+
+toObject([
+    { name: 'country', value: 'scotland' },
+    { name: 'town', value: 'glasgow' }
+])
+// {
+//     country: 'scotland',
+//     town: 'glasgow'
+// }
+
+omit(country=scotland&town=glasgow, [ 'country '])
+// 'town=glasgow'
+```
