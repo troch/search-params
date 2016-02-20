@@ -1,5 +1,5 @@
 {
-  "name": "query-string",
+  "name": "query-params",
   "version": "1.0.0",
   "description": "A module to manipulate search part of URLs (querystring)",
   "main": "dist/commonjs/index.js",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/troch/query-string.git"
+    "url": "git+https://github.com/troch/query-params.git"
   },
   "keywords": [
     "querystring",
@@ -35,7 +35,7 @@
   "author": "Thomas Roch <thomas.c.roch@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/troch/query-string/issues"
+    "url": "https://github.com/troch/query-params/issues"
   },
-  "homepage": "https://github.com/troch/query-string#readme"
+  "homepage": "https://github.com/troch/query-params#readme"
 }
