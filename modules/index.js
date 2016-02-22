@@ -7,8 +7,8 @@ const isSerialisable = val => val !== undefined && val !== null && val !== '';
 
 // Search param name
 const bracketTest = /\[\]$/;
-const hasBrackets = paramName => bracketTest.test(paramName);
-const withoutBrackets = paramName => paramName.replace(bracketTest, '');
+export const hasBrackets = paramName => bracketTest.test(paramName);
+export const withoutBrackets = paramName => paramName.replace(bracketTest, '');
 
 /**
  * Parse a querystring and return a list of params (Objects with name and value properties)

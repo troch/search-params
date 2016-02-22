@@ -20,6 +20,9 @@ Build a querystring from a list of parameters
 
 Remove a list of parameters (names) from a querystring
 
+#### withoutBrackets(paramName: String): Boolean
+
+Return true if a parameter ends with `[]`.
 
 ## Example
 
