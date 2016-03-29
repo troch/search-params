@@ -6,13 +6,13 @@
   "jsnext:main": "dist/es/index.js",
   "devDependencies": {
     "babel-core": "^6.4.0",
-    "babel-eslint": "^5.0.0",
+    "babel-eslint": "^6.0.0",
     "babel-plugin-transform-export-extensions": "^6.4.0",
     "babel-plugin-transform-object-rest-spread": "^6.3.13",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-es2015-rollup": "^1.1.1",
     "chai": "^3.4.1",
-    "eslint": "^2.1.0",
+    "eslint": "^2.5.0",
     "mkdirp": "^0.5.1",
     "mocha": "^2.3.4",
     "rimraf": "^2.5.0"
