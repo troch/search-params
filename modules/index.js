@@ -22,7 +22,12 @@ export const parse = querystring =>
             const split = param.split('=');
             const name = split[0];
             const value = split[1];
-            return params.concat({ name, value: decodeURIComponent(value) });
+
+            return params.concat(
+                split.length === 1
+                    ? { name, value: true }
+                    : { name, value: decodeURIComponent(value) }
+            );
         }, []);
 
 /**
@@ -52,8 +57,8 @@ export const toObject = paramList =>
  */
 export const build = paramList =>
     paramList
-        .map(({ name, value }) => [name].concat(isSerialisable(value) ? encodeURIComponent(value) : []))
-        .map(param => param.join('='))
+        .filter(({ value }) => value !== undefined && value !== null)
+        .map(({ name, value }) => value === true ? name : `${name}=${encodeURIComponent(value)}`)
         .join('&');
 
 /**

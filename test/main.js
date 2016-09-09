@@ -59,10 +59,12 @@ describe('query-string', () => {
 
     describe('build', () => {
         it('should build a querystring from a list of parameters', () => {
-            expect(build([
+            expect(parse('users=t&role=admin&superAdmin&search=')).to.eql([
                 { name: 'users', value: 't' },
-                { name: 'role', value: 'admin' }
-            ])).to.equal('users=t&role=admin')
+                { name: 'role', value: 'admin' },
+                { name: 'superAdmin', value: true },
+                { name: 'search', value: '' }
+            ])
         })
 
         it('should keep square brackets', () => {
@@ -71,5 +73,28 @@ describe('query-string', () => {
                 { name: 'role[]', value: 'admin' }
             ])).to.equal('users=t&role[]=admin')
         })
+
+        expect(build([
+            {
+                name: 'model',
+                value: undefined
+            },
+            {
+                name: 'type',
+                value: null
+            },
+            {
+                name: 'electric',
+                value: true
+            },
+            {
+                name: 'gearbox',
+                value: ''
+            },
+            {
+                name: 'engine',
+                value: '1.6'
+            }
+        ])).to.equal('electric&gearbox=&engine=1.6')
     })
 })
