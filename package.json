@@ -1,8 +1,8 @@
 {
   "name": "search-params",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "A module to manipulate search part of URLs (querystring)",
-  "main": "dist/commonjs/index.js",
+  "main": "index.js",
   "jsnext:main": "dist/es/index.js",
   "devDependencies": {
     "babel-core": "^6.4.0",
@@ -19,7 +19,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build:cjs": "babel modules --out-dir dist/commonjs",
+    "build:cjs": "babel modules --out-dir ./",
     "build:es": "BABEL_ENV=jsnext babel modules --out-dir dist/es",
     "build": "npm run clean && mkdirp dist && npm run build:cjs && npm run build:es",
     "test": "mocha --compilers js:babel-core/register --recursive 'test/main.js'"
