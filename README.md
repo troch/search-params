@@ -4,21 +4,21 @@
 
 ## API
 
-#### parse: (path: string, opts?: Options) => object
+#### parse: (path: string, opts?: IOptions) => object
 
 Parse a querystring and returns an object of parameters. See options below for available options.
 
-#### build: (params: object, opts?: Options) => string
+#### build: (params: object, opts?: IOptions) => string
 
 Build a querystring from a list of parameters
 
-#### omit(querystring: String, paramsToOmit: Array[String]): String
+#### omit: (path: string, paramsToOmit: string[], opts?: IOptions) => IOmitResponse
 
-Remove a list of parameters (names) from a querystring
+Remove a list of parameters (names) from a querystring, and returns an object containing `removedParams` and `querystring`.
 
-#### withoutBrackets(paramName: String): Boolean
+#### keep: (path: string, paramsToKeep: string[], opts?: IOptions) => IKeepResponse
 
-Return true if a parameter ends with `[]`.
+Keep a list of parameters (names) from a querystring, and returns an object containing `keptParams` and `querystring`.
 
 ## Options
 

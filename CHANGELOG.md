@@ -14,7 +14,7 @@
 * 'parse' now returns an object of parameters rather than a list
 * 'build' now takes an object of parameters rather than a list
 * 'omit' now returns an object with 'removedParams' and 'querystring'
-* 'getSearch' method has been removed
+* 'getSearch' and `withoutBrackets` methods have been removed
 
 
 
