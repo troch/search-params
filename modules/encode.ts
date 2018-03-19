@@ -16,16 +16,24 @@ export const makeOptions = (opts: Options = {}): FinalOptions => ({
     booleanFormat: opts.booleanFormat || 'none'
 })
 
-export const encodeValue = (value: any): string => encodeURIComponent(value)
+const encodeValue = (value: any): string => encodeURIComponent(value)
 
-export const decodeValue = (value: string): string => decodeURIComponent(value)
+const decodeValue = (value: string): string => decodeURIComponent(value)
 
-export const encodeBoolean = (
+const encodeBoolean = (
     name: string,
     value: boolean,
     opts: FinalOptions
 ): string => {
-    return `${name}=${value.toString()}`
+    let encodedValue
+
+    if (opts.booleanFormat === 'unicode') {
+        encodedValue = value ? '✓' : '✗'
+    } else {
+        encodedValue = value.toString()
+    }
+
+    return `${name}=${encodedValue}`
 }
 
 type nameEncoder = (val: string, index: number) => string
@@ -51,7 +59,7 @@ export const encodeArray = (
 
     return arr
         .map((val, index) => `${nameEncoder(name, index)}=${encodeValue(val)}`)
-        .join(',')
+        .join('&')
 }
 
 export const encode = (
@@ -82,6 +90,9 @@ export const decode = (value: any, opts: FinalOptions): boolean | string => {
     if (opts.booleanFormat === 'string') {
         if (value === 'true') return true
         if (value === 'false') return false
+    } else if (opts.booleanFormat === 'unicode') {
+        if (value === '✓') return true
+        if (value === '✗') return false
     }
 
     return decodeValue(value)

@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "module": "commonjs",
         "declaration": true,
         "declarationDir": "./typings",
         "outDir": "./temp",

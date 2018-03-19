@@ -16,6 +16,45 @@ describe('search-params', () => {
                 role: ['admin', 'moderator']
             })
         })
+
+        it('should parse booleans correctly', () => {
+            expect(parse('istrue=✓&isfalse=✗', { booleanFormat: 'unicode' })).to.eql({
+                istrue: true,
+                isfalse: false
+            })
+
+            expect(parse('istrue=true&isfalse=false', { booleanFormat: 'string' })).to.eql({
+                istrue: true,
+                isfalse: false
+            })
+
+            expect(parse('istrue=true&isfalse=false')).to.eql({
+                istrue: 'true',
+                isfalse: 'false'
+            })
+        })
+
+        it('should parse arrays correctly', () => {
+            expect(parse('role[]=member')).to.eql({
+                role: ['member']
+            })
+
+            expect(parse('role[0]=member')).to.eql({
+                role: ['member']
+            })
+
+            expect(parse('role[]=member&role[]=admin')).to.eql({
+                role: ['member', 'admin']
+            })
+
+            expect(parse('role[0]=member&role[1]=admin')).to.eql({
+                role: ['member', 'admin']
+            })
+
+            expect(parse('role=member&role=admin')).to.eql({
+                role: ['member', 'admin']
+            })
+        })
     })
 
     describe('omit', () => {
@@ -70,6 +109,53 @@ describe('search-params', () => {
                     gearbox: ''
                 })
             ).to.equal('type&electric=true&gearbox=')
+        })
+
+        it('should build booleans correctly', () => {
+            expect(build({
+                istrue: true,
+                isfalse: false
+            }, {
+                booleanFormat: 'none'
+            })).to.equal('istrue=true&isfalse=false')
+
+            expect(build({
+                istrue: true,
+                isfalse: false
+            }, {
+                booleanFormat: 'string'
+            })).to.equal('istrue=true&isfalse=false')
+
+            expect(build({
+                istrue: true,
+                isfalse: false
+            }, {
+                booleanFormat: 'unicode'
+            })).to.equal('istrue=✓&isfalse=✗')
+        })
+
+        it('should properly stringify arrays', () => {
+            expect(
+                build({
+                    role: ['member', 'admin']
+                }, {
+                    arrayFormat: 'brackets'
+                })
+            ).to.equal('role[]=member&role[]=admin')
+
+            expect(
+                build({
+                    role: ['member', 'admin']
+                }, {
+                    arrayFormat: 'index'
+                })
+            ).to.equal('role[0]=member&role[1]=admin')
+
+            expect(
+                build({
+                    role: ['member', 'admin']
+                })
+            ).to.equal('role=member&role=admin')
         })
     })
 })

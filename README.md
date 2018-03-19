@@ -4,15 +4,11 @@
 
 ## API
 
-#### parse(querystring: String): Array[Object]
+#### parse: (path: string, opts?: Options) => object
 
-Parse a querystring to a parameters list (an array of objects with name and value properties)
+Parse a querystring and returns an object of parameters. See options below for available options.
 
-#### toObject(paramList: Array[Object]): Object
-
-Convert a list of parameters to an object (key-value pairs)
-
-#### build(paramList: Array): String
+#### build: (params: object, opts?: Options) => string
 
 Build a querystring from a list of parameters
 
@@ -24,34 +20,49 @@ Remove a list of parameters (names) from a querystring
 
 Return true if a parameter ends with `[]`.
 
+## Options
+
+- `arrayFormat`: Specifies how arrays should be stringified
+    - `'none'` (default): no brackets or indexes are added to query parameter names (`'role=member&role=admin'`)
+    - `'brackets`: brackets are added to query parameter names (`'role[]=member&role[]=admin'`)
+    - `'index`: brackets and indexes are added to query parameter names (`'role[0]=member&role[1]=admin'`)
+- `booleanFormat`: 'none', 'string'
+    - `'none'` (default): booleans are stringified to strings (`'istrue=true&isfalse=false'`)
+    - `'string'`: as above but `'true'` and `'false'` are parsed as booleans
+    - `'unicode`: `true` and `false` are displayed with unicode characters, and parsed as booleans (`'istrue=✓&isfalse=✗'`)
+
 ## Example
 
 For more examples, look at the tests.
 
 ```js
-import { parse, build, toObject, omit } from 'search-params';
+import { parse, build, omit, keep } from 'search-params'
 
-parse('country=scotland&town=glasgow');
-// [
-//     { name: 'country', value: 'scotland' },
-//     { name: 'town', value: 'glasgow' }
-// ]
-
-build([
-    { name: 'country', value: 'scotland' },
-    { name: 'town', value: 'glasgow' }
-])
-// 'country=scotland&town=glasgow'
-
-toObject([
-    { name: 'country', value: 'scotland' },
-    { name: 'town', value: 'glasgow' }
-])
+parse('country=scotland&town=glasgow')
 // {
 //     country: 'scotland',
 //     town: 'glasgow'
 // }
 
-omit(country=scotland&town=glasgow, [ 'country '])
-// 'town=glasgow'
+build({
+    country: 'scotland',
+    town: 'glasgow'
+})
+// 'country=scotland&town=glasgow'
+
+omit('country=scotland&town=glasgow', ['country '])
+// {
+//     removedParams: {
+//         country: 'scotland'
+//     },
+//     querystring: 'town=glasgow'
+// }
+
+keep('country=scotland&town=glasgow', ['country '])
+// {
+//     keptParams: {
+//         country: 'scotland'
+//     },
+//     querystring: 'country=scotland'
+// }
 ```

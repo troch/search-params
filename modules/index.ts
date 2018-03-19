@@ -1,6 +1,4 @@
 import {
-    decodeValue,
-    encodeValue,
     decode,
     encode,
     Options,
@@ -23,7 +21,7 @@ export const parse = (path: string, opts?: Options): object => {
             const decodedValue = decode(value, options)
 
             if (currentValue === undefined) {
-                params[name] = hasBrackets ? [decodedValue] : value
+                params[name] = hasBrackets ? [decodedValue] : decodedValue
             } else {
                 params[name] = [].concat(currentValue, decodedValue)
             }
