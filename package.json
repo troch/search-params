@@ -10,13 +10,14 @@
     "clean": "rimraf dist",
     "build": "npm run clean && tsc && rollup -c rollup.config.js",
     "test": "mocha -r ts-node/register 'test/main.js'",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "lint": "eslint modules/*.ts"
   },
   "lint-staged": {
     "*.{js,ts,md}": [
       "prettier --write",
       "git add",
-      "eslint"
+      "tslint"
     ]
   },
   "repository": {
@@ -40,8 +41,6 @@
   "homepage": "https://github.com/troch/search-params#readme",
   "devDependencies": {
     "chai": "~4.1.2",
-    "eslint": "~4.11.0",
-    "eslint-config-prettier": "~2.9.0",
     "lint-staged": "~7.0.0",
     "mkdirp": "~0.5.1",
     "mocha": "~4.0.1",
@@ -50,7 +49,8 @@
     "rollup": "~0.57.1",
     "rollup-plugin-typescript2": "~0.12.0",
     "ts-node": "~5.0.1",
-    "typescript": "~2.7.2",
-    "typescript-eslint-parser": "~14.0.0"
+    "tslint": "~5.9.1",
+    "tslint-config-prettier": "~1.10.0",
+    "typescript": "~2.7.2"
   }
 }

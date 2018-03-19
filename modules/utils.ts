@@ -10,12 +10,12 @@ export const getSearch = (path: string): string => {
 
 export const isSerialisable = (val: any): boolean => val !== undefined
 
-export interface ParsedName {
+export interface IParsedName {
     hasBrackets: boolean
     name: string
 }
 
-export const parseName = (name: string): ParsedName => {
+export const parseName = (name: string): IParsedName => {
     const bracketPosition = name.indexOf('[')
     const hasBrackets = bracketPosition !== -1
 

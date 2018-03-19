@@ -1,17 +1,17 @@
 export type arrayFormat = 'none' | 'brackets' | 'index'
 export type booleanFormat = 'none' | 'string' | 'unicode'
 
-export interface Options {
+export interface IOptions {
     arrayFormat?: arrayFormat
     booleanFormat?: booleanFormat
 }
 
-export interface FinalOptions {
+export interface IFinalOptions {
     arrayFormat: arrayFormat
     booleanFormat: booleanFormat
 }
 
-export const makeOptions = (opts: Options = {}): FinalOptions => ({
+export const makeOptions = (opts: IOptions = {}): IFinalOptions => ({
     arrayFormat: opts.arrayFormat || 'none',
     booleanFormat: opts.booleanFormat || 'none'
 })
@@ -23,7 +23,7 @@ const decodeValue = (value: string): string => decodeURIComponent(value)
 const encodeBoolean = (
     name: string,
     value: boolean,
-    opts: FinalOptions
+    opts: IFinalOptions
 ): string => {
     let encodedValue
 
@@ -38,7 +38,7 @@ const encodeBoolean = (
 
 type nameEncoder = (val: string, index: number) => string
 
-const getNameEncoder = (opts: FinalOptions): nameEncoder => {
+const getNameEncoder = (opts: IFinalOptions): nameEncoder => {
     if (opts.arrayFormat === 'index') {
         return (name: string, index: number): string => `${name}[${index}]`
     }
@@ -53,19 +53,19 @@ const getNameEncoder = (opts: FinalOptions): nameEncoder => {
 export const encodeArray = (
     name: string,
     arr: any[],
-    opts: FinalOptions
+    opts: IFinalOptions
 ): string => {
-    const nameEncoder = getNameEncoder(opts)
+    const encodeName = getNameEncoder(opts)
 
     return arr
-        .map((val, index) => `${nameEncoder(name, index)}=${encodeValue(val)}`)
+        .map((val, index) => `${encodeName(name, index)}=${encodeValue(val)}`)
         .join('&')
 }
 
 export const encode = (
     name: string,
     value: any,
-    opts: FinalOptions
+    opts: IFinalOptions
 ): string => {
     if (value === null) {
         return name
@@ -82,17 +82,25 @@ export const encode = (
     return `${name}=${encodeValue(value)}`
 }
 
-export const decode = (value: any, opts: FinalOptions): boolean | string => {
+export const decode = (value: any, opts: IFinalOptions): boolean | string => {
     if (value === undefined) {
         return null
     }
 
     if (opts.booleanFormat === 'string') {
-        if (value === 'true') return true
-        if (value === 'false') return false
+        if (value === 'true') {
+            return true
+        }
+        if (value === 'false') {
+            return false
+        }
     } else if (opts.booleanFormat === 'unicode') {
-        if (value === '✓') return true
-        if (value === '✗') return false
+        if (value === '✓') {
+            return true
+        }
+        if (value === '✗') {
+            return false
+        }
     }
 
     return decodeValue(value)

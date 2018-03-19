@@ -1,15 +1,15 @@
 import {
     decode,
     encode,
-    Options,
+    IOptions,
     makeOptions
 } from './encode'
-import { getSearch, parseName, isSerialisable } from './utils'
+import { getSearch, isSerialisable, parseName } from './utils'
 
 /**
  * Parse a querystring and return an object of parameters
  */
-export const parse = (path: string, opts?: Options): object => {
+export const parse = (path: string, opts?: IOptions): object => {
     const options = makeOptions(opts)
 
     return getSearch(path)
@@ -33,7 +33,7 @@ export const parse = (path: string, opts?: Options): object => {
 /**
  * Build a querystring from an object of parameters
  */
-export const build = (params: object, opts?: Options): string => {
+export const build = (params: object, opts?: IOptions): string => {
     const options = makeOptions(opts)
 
     return Object.keys(params)
@@ -42,9 +42,9 @@ export const build = (params: object, opts?: Options): string => {
         .join('&')
 }
 
-export interface OmitResponse {
-    removedParams: object
+export interface IOmitResponse {
     querystring: string
+    removedParams: object
 }
 
 /**
@@ -53,14 +53,14 @@ export interface OmitResponse {
 export const omit = (
     path: string,
     paramsToOmit: string[],
-    opts?: Options
-): OmitResponse => {
+    opts?: IOptions
+): IOmitResponse => {
     const options = makeOptions(opts)
     const searchPart = getSearch(path)
     if (searchPart === '') {
         return {
-            removedParams: {},
-            querystring: ''
+            querystring: '',
+            removedParams: {}
         }
     }
 
@@ -77,14 +77,14 @@ export const omit = (
     )
 
     return {
-        removedParams: parse(removed.join('&'), options),
-        querystring: kept.join('&')
+        querystring: kept.join('&'),
+        removedParams: parse(removed.join('&'), options)
     }
 }
 
-export interface KeepResponse {
-    keptParams: object
+export interface IKeepResponse {
     querystring: string
+    keptParams: object
 }
 
 /**
@@ -93,8 +93,8 @@ export interface KeepResponse {
 export const keep = (
     path: string,
     paramsToKeep: string[],
-    opts?: Options
-): KeepResponse => {
+    opts?: IOptions
+): IKeepResponse => {
     const options = makeOptions(opts)
     const searchPart = getSearch(path)
     if (searchPart === '') {
