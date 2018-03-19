@@ -1,3 +1,23 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/troch/search-params/compare/v1.3.0...v2.0.0) (2018-03-19)
+
+
+### Code Refactoring
+
+* major library refactor ([5b53d09](https://github.com/troch/search-params/commit/5b53d09))
+
+
+### BREAKING CHANGES
+
+* do NOT upgrade to version 2.x.x if you use router5@5.x.x, route-node@2.x.x or path-parser@3.x.x
+* 'toObject' method has been removed
+* 'parse' now returns an object of parameters rather than a list
+* 'build' now takes an object of parameters rather than a list
+* 'omit' now returns an object with 'removedParams' and 'querystring'
+* 'getSearch' method has been removed
+
+
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/troch/search-params/compare/v1.2.0...v1.3.0) (2016-09-09)
 
