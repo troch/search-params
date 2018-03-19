@@ -1,25 +1,25 @@
-import { Options } from './encode';
+import { IOptions } from './encode';
 /**
  * Parse a querystring and return an object of parameters
  */
-export declare const parse: (path: string, opts?: Options) => object;
+export declare const parse: (path: string, opts?: IOptions) => object;
 /**
  * Build a querystring from an object of parameters
  */
-export declare const build: (params: object, opts?: Options) => string;
-export interface OmitResponse {
+export declare const build: (params: object, opts?: IOptions) => string;
+export interface IOmitResponse {
+    querystring: string;
     removedParams: object;
-    querystring: string;
 }
 /**
  * Remove a list of parameters from a querystring
  */
-export declare const omit: (path: string, paramsToOmit: string[], opts?: Options) => OmitResponse;
-export interface KeepResponse {
+export declare const omit: (path: string, paramsToOmit: string[], opts?: IOptions) => IOmitResponse;
+export interface IKeepResponse {
+    querystring: string;
     keptParams: object;
-    querystring: string;
 }
 /**
  * Remove a list of parameters from a querystring
  */
-export declare const keep: (path: string, paramsToKeep: string[], opts?: Options) => KeepResponse;
+export declare const keep: (path: string, paramsToKeep: string[], opts?: IOptions) => IKeepResponse;

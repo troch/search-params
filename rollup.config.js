@@ -3,7 +3,9 @@ import typescript from 'rollup-plugin-typescript2'
 export default ['es', 'cjs'].map(format => ({
     input: 'modules/index.ts',
     plugins: [
-        typescript()
+        typescript({
+            useTsconfigDeclarationDir: true
+        })
     ],
     output: {
         name: 'SearchParams',
