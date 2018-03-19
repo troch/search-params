@@ -1,5 +1,6 @@
 **/.*
 test
+modules
 node_modules
 npm-debug.log
 *.md

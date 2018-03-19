@@ -2,14 +2,22 @@
   "name": "search-params",
   "version": "1.3.0",
   "description": "A module to manipulate search part of URLs (querystring)",
-  "main": "index.js",
+  "main": "dist/cjs/index.js",
   "jsnext:main": "dist/es/index.js",
+  "side-effects": false,
+  "typings": "typings/index.d.ts",
   "scripts": {
     "clean": "rimraf dist",
-    "build:cjs": "babel modules --out-dir ./",
-    "build:es": "BABEL_ENV=jsnext babel modules --out-dir dist/es",
-    "build": "npm run clean && mkdirp dist && npm run build:cjs && npm run build:es",
-    "test": "mocha --compilers js:babel-core/register --recursive 'test/main.js'"
+    "build": "npm run clean && tsc && rollup -c rollup.config.js",
+    "test": "mocha -r ts-node/register 'test/main.js'",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,md}": [
+      "prettier --write",
+      "git add",
+      "eslint"
+    ]
   },
   "repository": {
     "type": "git",
@@ -18,6 +26,8 @@
   "keywords": [
     "querystring",
     "query",
+    "query params",
+    "search params",
     "search",
     "location",
     "url"
@@ -28,18 +38,19 @@
     "url": "https://github.com/troch/search-params/issues"
   },
   "homepage": "https://github.com/troch/search-params#readme",
-  "dependencies": {
-    "babel-cli": "~6.26.0",
-    "babel-core": "~6.26.0",
-    "babel-eslint": "~8.0.2",
-    "babel-plugin-transform-export-extensions": "~6.22.0",
-    "babel-plugin-transform-object-rest-spread": "~6.26.0",
-    "babel-preset-es2015": "~6.24.1",
-    "babel-preset-es2015-rollup": "~3.0.0",
+  "devDependencies": {
     "chai": "~4.1.2",
     "eslint": "~4.11.0",
+    "eslint-config-prettier": "~2.9.0",
+    "lint-staged": "~7.0.0",
     "mkdirp": "~0.5.1",
     "mocha": "~4.0.1",
-    "rimraf": "~2.6.2"
+    "prettier": "~1.11.1",
+    "rimraf": "~2.6.2",
+    "rollup": "~0.57.1",
+    "rollup-plugin-typescript2": "~0.12.0",
+    "ts-node": "~5.0.1",
+    "typescript": "~2.7.2",
+    "typescript-eslint-parser": "~14.0.0"
   }
 }

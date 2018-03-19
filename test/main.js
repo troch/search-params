@@ -1,100 +1,75 @@
-import { expect } from 'chai'
-import { parse, omit, toObject, build } from '../modules'
+const { expect } = require('chai')
+const { parse, omit, build, keep } = require('../modules/index.ts')
 
-describe('query-string', () => {
+describe('search-params', () => {
     describe('parse', () => {
         it('should parse a querystring to a list of params', () => {
-            expect(parse('users=t&role=admin')).to.eql([
-                { name: 'users', value: 't' },
-                { name: 'role', value: 'admin' }
-            ])
+            expect(parse('users=t&role=admin')).to.eql({
+                users: 't',
+                role: 'admin'
+            })
         })
 
         it('should handle multiple parameters with the same name', () => {
-            expect(parse('users=t&role=admin&role=moderator')).to.eql([
-                { name: 'users', value: 't' },
-                { name: 'role', value: 'admin' },
-                { name: 'role', value: 'moderator' }
-            ])
+            expect(parse('users=t&role=admin&role=moderator')).to.eql({
+                users: 't',
+                role: ['admin', 'moderator']
+            })
         })
     })
 
     describe('omit', () => {
         it('should remove parameters from search', () => {
-            expect(omit('users=t&role=admin', [ 'role' ]))
-                .to.equal('users=t');
+            expect(omit('users=t&role=admin', ['role'])).to.eql({
+                removedParams: {
+                    role: 'admin'
+                },
+                querystring: 'users=t'
+            })
         })
 
         it('should omit all supplied parameters', () => {
-            expect(omit('users=t&role=admin', [ 'users', 'role' ]))
-                .to.equal('');
+            expect(omit('users=t&role=admin', ['users', 'role'])).to.eql({
+                removedParams: {
+                    users: 't',
+                    role: 'admin'
+                },
+                querystring: ''
+            })
         })
     })
 
-    describe('toObject', () => {
-        it('should convert a list of parameters to an object', () => {
-            expect(toObject(parse('users=t&role=admin')))
-                .to.eql({
+    describe('keep', () => {
+        it('should keep parameters from search', () => {
+            expect(keep('users=t&role=admin', ['role'])).to.eql({
+                keptParams: {
+                    role: 'admin'
+                },
+                querystring: 'role=admin'
+            })
+        })
+
+        it('should omit all supplied parameters', () => {
+            expect(omit('users=t&role=admin', ['users', 'role'])).to.eql({
+                removedParams: {
                     users: 't',
                     role: 'admin'
-                });
-        })
-
-        it('should handle lists of values with square brackets', () => {
-            expect(toObject(parse('users=t&role[]=admin&role[]=reviewer')))
-                .to.eql({
-                    users: 't',
-                    role: [ 'admin', 'reviewer' ]
-                });
-        })
-
-        it('should handle lists of values without square brackets', () => {
-            expect(toObject(parse('users=t&role=admin&role=reviewer')))
-                .to.eql({
-                    users: 't',
-                    role: [ 'admin', 'reviewer' ]
-                });
+                },
+                querystring: ''
+            })
         })
     })
 
     describe('build', () => {
-        it('should build a querystring from a list of parameters', () => {
-            expect(parse('users=t&role=admin&superAdmin&search=')).to.eql([
-                { name: 'users', value: 't' },
-                { name: 'role', value: 'admin' },
-                { name: 'superAdmin', value: true },
-                { name: 'search', value: '' }
-            ])
+        it('should build a querystring from a parameters', () => {
+            expect(
+                build({
+                    model: undefined,
+                    type: null,
+                    electric: true,
+                    gearbox: ''
+                })
+            ).to.equal('type&electric=true&gearbox=')
         })
-
-        it('should keep square brackets', () => {
-            expect(build([
-                { name: 'users', value: 't' },
-                { name: 'role[]', value: 'admin' }
-            ])).to.equal('users=t&role[]=admin')
-        })
-
-        expect(build([
-            {
-                name: 'model',
-                value: undefined
-            },
-            {
-                name: 'type',
-                value: null
-            },
-            {
-                name: 'electric',
-                value: true
-            },
-            {
-                name: 'gearbox',
-                value: ''
-            },
-            {
-                name: 'engine',
-                value: '1.6'
-            }
-        ])).to.equal('electric&gearbox=&engine=1.6')
     })
 })
