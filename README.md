@@ -26,10 +26,14 @@ Keep a list of parameters (names) from a querystring, and returns an object cont
     - `'none'` (default): no brackets or indexes are added to query parameter names (`'role=member&role=admin'`)
     - `'brackets`: brackets are added to query parameter names (`'role[]=member&role[]=admin'`)
     - `'index`: brackets and indexes are added to query parameter names (`'role[0]=member&role[1]=admin'`)
-- `booleanFormat`: 'none', 'string'
+- `booleanFormat`: specifies how boolean values are stringified and parsed
     - `'none'` (default): booleans are stringified to strings (`'istrue=true&isfalse=false'`)
     - `'string'`: as above but `'true'` and `'false'` are parsed as booleans
     - `'unicode`: `true` and `false` are displayed with unicode characters, and parsed as booleans (`'istrue=✓&isfalse=✗'`)
+- `nullFormat`: specifies how null values are stringified and parsed
+    - `'default'` (default): null values are stringified without equal sign and value (`'isnull'`)
+    - `'string'`: null values are stringified to `'null'` (`'isnull=null'`) and parsed as null values
+    - `'hidden`: null values are not stringified
 
 ## Example
 

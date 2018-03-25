@@ -168,6 +168,15 @@ describe('search-params', () => {
             ).to.equal('role=member&role=admin')
         })
 
+        it('should build undefined values correctly', () => {
+            expect(build({
+                role: undefined,
+                abc: '123'
+            }, {
+                nullFormat: 'hidden'
+            })).to.equal('abc=123')
+        })
+
         it('should build null values correctly', () => {
             expect(build({
                 role: null
