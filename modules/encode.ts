@@ -1,16 +1,16 @@
 export type arrayFormat = 'none' | 'brackets' | 'index'
-export type booleanFormat = 'none' | 'string' | 'unicode'
+export type booleanFormat = 'none' | 'string' | 'unicode' | 'empty-true'
 export type nullFormat = 'default' | 'string' | 'hidden'
 
 export interface IOptions {
     arrayFormat?: arrayFormat
-    booleanFormat?: booleanFormat,
+    booleanFormat?: booleanFormat
     nullFormat?: nullFormat
 }
 
 export interface IFinalOptions {
     arrayFormat: arrayFormat
-    booleanFormat: booleanFormat,
+    booleanFormat: booleanFormat
     nullFormat: nullFormat
 }
 
@@ -29,6 +29,10 @@ const encodeBoolean = (
     value: boolean,
     opts: IFinalOptions
 ): string => {
+    if (opts.booleanFormat === 'empty-true' && value) {
+        return name
+    }
+
     let encodedValue
 
     if (opts.booleanFormat === 'unicode') {
@@ -100,7 +104,7 @@ export const encode = (
 
 export const decode = (value: any, opts: IFinalOptions): boolean | string => {
     if (value === undefined) {
-        return null
+        return opts.booleanFormat === 'empty-true' ? true : null
     }
 
     if (opts.booleanFormat === 'string') {

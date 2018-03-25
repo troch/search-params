@@ -28,6 +28,11 @@ describe('search-params', () => {
                 isfalse: false
             })
 
+            expect(parse('istrue&isfalse=false', { booleanFormat: 'empty-true' })).to.eql({
+                istrue: true,
+                isfalse: 'false'
+            })
+
             expect(parse('istrue=true&isfalse=false')).to.eql({
                 istrue: 'true',
                 isfalse: 'false'
@@ -128,6 +133,13 @@ describe('search-params', () => {
             }, {
                 booleanFormat: 'none'
             })).to.equal('istrue=true&isfalse=false')
+
+            expect(build({
+                istrue: true,
+                isfalse: false
+            }, {
+                booleanFormat: 'empty-true'
+            })).to.equal('istrue&isfalse=false')
 
             expect(build({
                 istrue: true,

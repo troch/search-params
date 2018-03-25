@@ -1,5 +1,5 @@
 export declare type arrayFormat = 'none' | 'brackets' | 'index';
-export declare type booleanFormat = 'none' | 'string' | 'unicode';
+export declare type booleanFormat = 'none' | 'string' | 'unicode' | 'empty-true';
 export declare type nullFormat = 'default' | 'string' | 'hidden';
 export interface IOptions {
     arrayFormat?: arrayFormat;
