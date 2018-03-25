@@ -6,6 +6,8 @@ import {
 } from './encode'
 import { getSearch, isSerialisable, parseName } from './utils'
 
+export { IOptions }
+
 /**
  * Parse a querystring and return an object of parameters
  */

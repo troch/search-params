@@ -1,4 +1,5 @@
 import { IOptions } from './encode';
+export { IOptions };
 /**
  * Parse a querystring and return an object of parameters
  */
