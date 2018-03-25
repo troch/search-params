@@ -22,6 +22,8 @@ Keep a list of parameters (names) from a querystring, and returns an object cont
 
 ## Options
 
+All options are optional.
+
 - `arrayFormat`: Specifies how arrays should be stringified
     - `'none'` (default): no brackets or indexes are added to query parameter names (`'role=member&role=admin'`)
     - `'brackets`: brackets are added to query parameter names (`'role[]=member&role[]=admin'`)

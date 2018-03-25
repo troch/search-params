@@ -1,3 +1,14 @@
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/troch/search-params/compare/v2.0.0...v2.1.0) (2018-03-25)
+
+
+### Features
+
+* add 'empty-true' options for booleans ([9e3950b](https://github.com/troch/search-params/commit/9e3950b))
+* add 'nullFormat' option ([9b452db](https://github.com/troch/search-params/commit/9b452db))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/troch/search-params/compare/v1.3.0...v2.0.0) (2018-03-19)
 
