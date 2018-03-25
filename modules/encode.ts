@@ -1,19 +1,23 @@
 export type arrayFormat = 'none' | 'brackets' | 'index'
 export type booleanFormat = 'none' | 'string' | 'unicode'
+export type nullFormat = 'default' | 'string' | 'hidden'
 
 export interface IOptions {
     arrayFormat?: arrayFormat
-    booleanFormat?: booleanFormat
+    booleanFormat?: booleanFormat,
+    nullFormat?: nullFormat
 }
 
 export interface IFinalOptions {
     arrayFormat: arrayFormat
-    booleanFormat: booleanFormat
+    booleanFormat: booleanFormat,
+    nullFormat: nullFormat
 }
 
 export const makeOptions = (opts: IOptions = {}): IFinalOptions => ({
     arrayFormat: opts.arrayFormat || 'none',
-    booleanFormat: opts.booleanFormat || 'none'
+    booleanFormat: opts.booleanFormat || 'none',
+    nullFormat: opts.nullFormat || 'default'
 })
 
 const encodeValue = (value: any): string => encodeURIComponent(value)
@@ -34,6 +38,18 @@ const encodeBoolean = (
     }
 
     return `${name}=${encodedValue}`
+}
+
+const encodeNull = (name, opts: IFinalOptions): string => {
+    if (opts.nullFormat === 'hidden') {
+        return ''
+    }
+
+    if (opts.nullFormat === 'string') {
+        return `${name}=null`
+    }
+
+    return name
 }
 
 type nameEncoder = (val: string, index: number) => string
@@ -68,7 +84,7 @@ export const encode = (
     opts: IFinalOptions
 ): string => {
     if (value === null) {
-        return name
+        return encodeNull(name, opts)
     }
 
     if (typeof value === 'boolean') {
@@ -100,6 +116,10 @@ export const decode = (value: any, opts: IFinalOptions): boolean | string => {
         }
         if (value === '✗') {
             return false
+        }
+    } else if (opts.nullFormat === 'string') {
+        if (value === 'null') {
+            return null
         }
     }
 

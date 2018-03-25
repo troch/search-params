@@ -55,6 +55,16 @@ describe('search-params', () => {
                 role: ['member', 'admin']
             })
         })
+
+        it('should parse null values correctly', () => {
+            expect(parse('role')).to.eql({
+                role: null
+            })
+
+            expect(parse('role')).to.eql({
+                role: null
+            })
+        })
     })
 
     describe('omit', () => {
@@ -156,6 +166,25 @@ describe('search-params', () => {
                     role: ['member', 'admin']
                 })
             ).to.equal('role=member&role=admin')
+        })
+
+        it('should build null values correctly', () => {
+            expect(build({
+                role: null
+            })).to.equal('role')
+
+            expect(build({
+                role: null
+            }, {
+                nullFormat: 'string'
+            })).to.equal('role=null')
+
+            expect(build({
+                role: null,
+                abc: '123'
+            }, {
+                nullFormat: 'hidden'
+            })).to.equal('abc=123')
         })
     })
 })

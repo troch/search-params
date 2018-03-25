@@ -39,6 +39,7 @@ export const build = (params: object, opts?: IOptions): string => {
     return Object.keys(params)
         .filter(paramName => isSerialisable(params[paramName]))
         .map(paramName => encode(paramName, params[paramName], options))
+        .filter(Boolean)
         .join('&')
 }
 
