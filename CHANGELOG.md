@@ -1,3 +1,13 @@
+<a name="2.1.2"></a>
+## [2.1.2](https://github.com/troch/search-params/compare/v2.1.1...v2.1.2) (2018-03-27)
+
+
+### Bug Fixes
+
+* fix package.json config (sideEffects) and add module ([73fe800](https://github.com/troch/search-params/commit/73fe800))
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/troch/search-params/compare/v2.1.0...v2.1.1) (2018-03-25)
 
