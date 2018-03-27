@@ -4,7 +4,8 @@
   "description": "A module to manipulate search part of URLs (querystring)",
   "main": "dist/cjs/index.js",
   "jsnext:main": "dist/es/index.js",
-  "side-effects": false,
+  "modules": "dist/es/index.js",
+  "sideEffects": false,
   "types": "typings/index.d.ts",
   "scripts": {
     "clean": "rimraf dist",
