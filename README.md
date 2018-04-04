@@ -27,16 +27,16 @@ All options are optional.
 - `arrayFormat`: Specifies how arrays should be stringified
     - `'none'` (default): no brackets or indexes are added to query parameter names (`'role=member&role=admin'`)
     - `'brackets`: brackets are added to query parameter names (`'role[]=member&role[]=admin'`)
-    - `'index`: brackets and indexes are added to query parameter names (`'role[0]=member&role[1]=admin'`)
+    - `'index'`: brackets and indexes are added to query parameter names (`'role[0]=member&role[1]=admin'`)
 - `booleanFormat`: specifies how boolean values are stringified and parsed
     - `'none'` (default): booleans are stringified to strings (`'istrue=true&isfalse=false'`)
     - `'empty-true'`: same as `'none'` except true values are stringified without value (`'istrue&isfalse=false'`). If you choose this boolean format, make sure to change the value of `'nullFormat'`.
-    - `'string'`: as above but `'true'` and `'false'` are parsed as booleans
-    - `'unicode`: `true` and `false` are displayed with unicode characters, and parsed as booleans (`'istrue=✓&isfalse=✗'`)
+    - `'string'`: same as `'none'` but `'true'` and `'false'` are parsed as booleans
+    - `'unicode'`: `true` and `false` are displayed with unicode characters, and parsed as booleans (`'istrue=✓&isfalse=✗'`)
 - `nullFormat`: specifies how null values are stringified and parsed
     - `'default'` (default): null values are stringified without equal sign and value (`'isnull'`)
     - `'string'`: null values are stringified to `'null'` (`'isnull=null'`) and parsed as null values
-    - `'hidden`: null values are not stringified
+    - `'hidden'`: null values are not stringified
 
 ## Example
 
