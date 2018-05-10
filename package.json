@@ -10,7 +10,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && rollup -c rollup.config.js",
-    "test": "mocha -r ts-node/register 'test/main.js'",
+    "test": "mocha -r ts-node/register 'test/*.js'",
     "precommit": "lint-staged",
     "lint": "eslint modules/*.ts",
     "clog": "conventional-changelog -p angular -i CHANGELOG.md -s"
