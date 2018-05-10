@@ -3,5 +3,6 @@
 /temp
 /node_modules
 /modules/*.js
+.idea
 npm-debug.log
 index.js
