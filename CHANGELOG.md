@@ -1,3 +1,13 @@
+<a name="2.1.3"></a>
+## [2.1.3](https://github.com/troch/search-params/compare/v2.1.2...v2.1.3) (2018-06-05)
+
+
+### Bug Fixes
+
+* decode unicode values to account for them coming from a browser URL ([262db43](https://github.com/troch/search-params/commit/262db43))
+
+
+
 <a name="2.1.2"></a>
 ## [2.1.2](https://github.com/troch/search-params/compare/v2.1.1...v2.1.2) (2018-03-27)
 
