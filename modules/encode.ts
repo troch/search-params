@@ -115,10 +115,10 @@ export const decode = (value: any, opts: IFinalOptions): boolean | string => {
             return false
         }
     } else if (opts.booleanFormat === 'unicode') {
-        if (value === '✓') {
+        if (decodeValue(value) === '✓') {
             return true
         }
-        if (value === '✗') {
+        if (decodeValue(value) === '✗') {
             return false
         }
     } else if (opts.nullFormat === 'string') {
