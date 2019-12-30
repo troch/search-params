@@ -2,26 +2,14 @@
   "name": "search-params",
   "version": "2.1.3",
   "description": "A module to manipulate search part of URLs (querystring)",
-  "main": "dist/cjs/index.js",
-  "jsnext:main": "dist/es/index.js",
-  "modules": "dist/es/index.js",
+  "main": "dist/index.js",
+  "module": "dist/search-params.esm.js",
+  "typings": "dist/index.d.ts",
   "sideEffects": false,
-  "types": "typings/index.d.ts",
-  "scripts": {
-    "clean": "rimraf dist",
-    "build": "npm run clean && rollup -c rollup.config.js",
-    "test": "mocha -r ts-node/register 'test/main.js'",
-    "precommit": "lint-staged",
-    "lint": "eslint modules/*.ts",
-    "clog": "conventional-changelog -p angular -i CHANGELOG.md -s"
-  },
-  "lint-staged": {
-    "*.{js,ts,md}": [
-      "prettier --write",
-      "git add",
-      "tslint"
-    ]
-  },
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/troch/search-params.git"
@@ -41,20 +29,25 @@
     "url": "https://github.com/troch/search-params/issues"
   },
   "homepage": "https://github.com/troch/search-params#readme",
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "lint": "tsdx lint src test",
+    "prepare": "tsdx build",
+    "clog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+  },
   "devDependencies": {
-    "chai": "~4.1.2",
-    "conventional-changelog-angular": "~1.6.6",
-    "conventional-changelog-cli": "~1.3.16",
-    "lint-staged": "~7.0.0",
-    "mkdirp": "~0.5.1",
-    "mocha": "~4.0.1",
-    "prettier": "~1.11.1",
-    "rimraf": "~2.6.2",
-    "rollup": "~0.57.1",
-    "rollup-plugin-typescript2": "~0.12.0",
-    "ts-node": "~5.0.1",
-    "tslint": "~5.9.1",
-    "tslint-config-prettier": "~1.10.0",
-    "typescript": "~2.7.2"
+    "conventional-changelog-cli": "2.0.31",
+    "@types/jest": "^24.0.25",
+    "husky": "^3.1.0",
+    "tsdx": "^0.12.1",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint src test"
+    }
   }
 }

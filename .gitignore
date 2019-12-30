@@ -1,7 +1,4 @@
-/.rpt2_cache
-/dist
-/temp
-/node_modules
-/modules/*.js
-npm-debug.log
-index.js
+*.log
+.DS_Store
+node_modules
+dist
