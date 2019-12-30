@@ -9,6 +9,18 @@ describe('search-params', () => {
       })
     })
 
+    it('should be typable with a custom type', () => {
+      interface Params {
+        users: 'string'
+        role: string
+      }
+
+      expect(parse<Params>('users=t&role=admin')).toEqual({
+        users: 't',
+        role: 'admin'
+      })
+    })
+
     it('should handle multiple parameters with the same name', () => {
       expect(parse('users=t&role=admin&role=moderator')).toEqual({
         users: 't',
@@ -146,6 +158,20 @@ describe('search-params', () => {
           gearbox: ''
         })
       ).toBe('type&electric=true&gearbox=')
+    })
+
+    it('should be typable with a custom type', () => {
+      interface Params {
+        electric: boolean
+        type: string
+      }
+
+      expect(
+        build<Params>({
+          type: 'city',
+          electric: true
+        })
+      ).toBe('type=city&electric=true')
     })
 
     it('should build booleans correctly', () => {

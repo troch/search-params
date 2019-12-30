@@ -3,8 +3,6 @@ import { getSearch, isSerialisable, parseName } from './utils'
 
 export { IOptions }
 
-export type SearchParamScalar = string | boolean | null
-
 export type SearchParams = Record<
   string,
   string | boolean | null | Array<string | boolean | null> | undefined
@@ -13,32 +11,40 @@ export type SearchParams = Record<
 /**
  * Parse a querystring and return an object of parameters
  */
-export const parse = (path: string, opts?: IOptions): SearchParams => {
+export const parse = <T extends Record<string, any> = SearchParams>(
+  path: string,
+  opts?: IOptions
+): T => {
   const options = makeOptions(opts)
 
   return getSearch(path)
     .split('&')
-    .reduce<SearchParams>((params, param) => {
+    .reduce<Record<string, any>>((params, param) => {
       const [rawName, value] = param.split('=')
       const { hasBrackets, name } = parseName(rawName)
       const currentValue = params[name]
       const decodedValue = decode(value, options)
 
       if (currentValue === undefined) {
-        params[name] = hasBrackets ? [decodedValue as string] : decodedValue
+        params[name] = hasBrackets ? [decodedValue] : decodedValue
       } else {
-        // @ts-ignore
-        params[name] = [].concat(currentValue, decodedValue)
+        params[name] = (Array.isArray(currentValue)
+          ? currentValue
+          : [currentValue]
+        ).concat(decodedValue)
       }
 
       return params
-    }, {})
+    }, {}) as T
 }
 
 /**
  * Build a querystring from an object of parameters
  */
-export const build = (params: SearchParams, opts?: IOptions): string => {
+export const build = <T extends Record<string, any> = SearchParams>(
+  params: T,
+  opts?: IOptions
+): string => {
   const options = makeOptions(opts)
 
   return Object.keys(params)
