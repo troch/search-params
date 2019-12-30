@@ -1,3 +1,16 @@
+# [3.0.0](https://github.com/troch/search-params/compare/v2.1.3...v3.0.0) (2019-12-30)
+
+
+### Maintain package
+
+([#2](https://github.com/troch/search-params/issues/2)) ([f41f072](https://github.com/troch/search-params/commit/f41f0722c19bd896797fd24be7277a6ccf8f2138)):
+- Update dev dependencies
+- Switch to strict type checking (TypeScript)
+- Add optional generic type to `parse` and `build`
+- Fix bug on decoding values
+
+
+
 <a name="2.1.3"></a>
 ## [2.1.3](https://github.com/troch/search-params/compare/v2.1.2...v2.1.3) (2018-06-05)
 
