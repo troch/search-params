@@ -104,6 +104,12 @@ describe('search-params', () => {
         role: null
       })
     })
+
+    it('should parse plus signs to spaces', () => {
+      expect(parse('role=admin+author')).toEqual({
+        role: 'admin author'
+      })
+    })
   })
 
   describe('omit', () => {
