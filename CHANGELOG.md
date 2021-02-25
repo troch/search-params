@@ -1,3 +1,20 @@
+# [4.0.0](https://github.com/troch/search-params/compare/v3.0.0...v4.0.0) (2021-02-25)
+
+
+### Bug Fixes
+
+* parse plus signs to spaces and correctly handle param names ([#5](https://github.com/troch/search-params/issues/5)) ([052c570](https://github.com/troch/search-params/commit/052c570920140e3a47050c56024a6bc3e5c75804))
+
+
+### BREAKING CHANGES
+
+Possible breaking changes:
+
+* Non encoded plus signs are now parsed to spaces
+* Parameter names are now properly encoded and decoded
+
+
+
 # [3.0.0](https://github.com/troch/search-params/compare/v2.1.3...v3.0.0) (2019-12-30)
 
 
