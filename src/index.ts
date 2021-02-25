@@ -1,4 +1,4 @@
-import { decode, encode, IOptions, makeOptions } from './encode'
+import { decode, decodeValue, encode, IOptions, makeOptions } from './encode'
 import { getSearch, isSerialisable, parseName } from './utils'
 
 export { IOptions }
@@ -22,13 +22,14 @@ export const parse = <T extends Record<string, any> = SearchParams>(
     .reduce<Record<string, any>>((params, param) => {
       const [rawName, value] = param.split('=')
       const { hasBrackets, name } = parseName(rawName)
+      const decodedName = decodeValue(name)
       const currentValue = params[name]
       const decodedValue = decode(value, options)
 
       if (currentValue === undefined) {
-        params[name] = hasBrackets ? [decodedValue] : decodedValue
+        params[decodedName] = hasBrackets ? [decodedValue] : decodedValue
       } else {
-        params[name] = (Array.isArray(currentValue)
+        params[decodedName] = (Array.isArray(currentValue)
           ? currentValue
           : [currentValue]
         ).concat(decodedValue)

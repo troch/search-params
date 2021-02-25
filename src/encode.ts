@@ -22,7 +22,8 @@ export const makeOptions = (opts: IOptions = {}): IFinalOptions => ({
 
 const encodeValue = (value: any): string => encodeURIComponent(value)
 
-const decodeValue = (value: string): string => decodeURIComponent(value)
+export const decodeValue = (value: string): string =>
+  decodeURIComponent(value.replace('+', ' '))
 
 const encodeBoolean = (
   name: string,
@@ -87,19 +88,21 @@ export const encode = (
   value: any,
   opts: IFinalOptions
 ): string => {
+  const encodedName = encodeValue(name)
+
   if (value === null) {
-    return encodeNull(name, opts)
+    return encodeNull(encodedName, opts)
   }
 
   if (typeof value === 'boolean') {
-    return encodeBoolean(name, value, opts)
+    return encodeBoolean(encodedName, value, opts)
   }
 
   if (Array.isArray(value)) {
-    return encodeArray(name, value, opts)
+    return encodeArray(encodedName, value, opts)
   }
 
-  return `${name}=${encodeValue(value)}`
+  return `${encodedName}=${encodeValue(value)}`
 }
 
 export const decode = (
@@ -119,20 +122,22 @@ export const decode = (
     }
   }
 
-  if (opts.booleanFormat === 'unicode') {
-    if (decodeValue(value) === '✓') {
-      return true
-    }
-    if (decodeValue(value) === '✗') {
-      return false
-    }
-  }
-
   if (opts.nullFormat === 'string') {
     if (value === 'null') {
       return null
     }
   }
 
-  return decodeValue(value)
+  const decodedValue = decodeValue(value)
+
+  if (opts.booleanFormat === 'unicode') {
+    if (decodedValue === '✓') {
+      return true
+    }
+    if (decodedValue === '✗') {
+      return false
+    }
+  }
+
+  return decodedValue
 }
