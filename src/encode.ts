@@ -23,7 +23,7 @@ export const makeOptions = (opts: IOptions = {}): IFinalOptions => ({
 const encodeValue = (value: any): string => encodeURIComponent(value)
 
 export const decodeValue = (value: string): string =>
-  decodeURIComponent(value.replace('+', ' '))
+  decodeURIComponent(value.replace(/\+/g, ' '))
 
 const encodeBoolean = (
   name: string,
